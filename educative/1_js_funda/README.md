@@ -1,5 +1,9 @@
 # Javascript
 
+Important links:
+[Conditional Rendering](https://www.robinwieruch.de/conditional-rendering-react)
+[Object Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+
 Variable declaration
 
 `var`, `const`, and `let`
@@ -93,6 +97,154 @@ Some of the most common unary operators in JS are:
 - `delete` -- Deletes an object, object's attribute or an instance in an array
 - `void` -- specifics that an expression does not return anything
 - Increment operators `++, --`
+
+# Deep Equals vs. Double Equals in JS
+
+` ===` is the **deep equals** operator. This performs TYPE COMPARISON.
+` == ` is a more shallow equals operator. Converts the type of one of the operands to make their types the same.
+
+```
+// Shallow Equals
+console.log(1 == 1); //returns true
+console.log('1' == 1); //returns true
+
+// Deep Equals
+console.log(1 === 1); //returns true
+console.log('1' === 1); //returns false
+```
+
+# Expressions
+
+Anything that evaluates to a **value** in JS is called an expression.
+
+Some of the basic expressions and keywords used in JS are:
+
+1) `this` - points to the current object
+2) `super` - calls methods on an object's parent, for example, call parent's constructor
+3) `function` - used to defined a function
+4) `function*` - used to defined a GENERATOR function
+5) `async function` - used to define an async function
+
+# Ternary Operator in React - Aka. Conditional Operator (? :)
+
+Takes three operands, and returns a value based on some condition.
+
+It's an alternative for the `if statement`. This could be used for multiple purposes and comes in very handy in React as well!
+
+Displaying JS strings, objects, and arrays in React is NOT enough. 
+
+If-else statement for `conditional rendering`. You cannot use an if-else statement directly in JSX (ES 6), but you can return early from the rendering function.
+
+Return `null` is valid in ReAct when displaying nothing. Just like we did in the example given below.
+
+> Conditional rendering in React uses JS operators like `if` or the conditional operators to create elements representing the current state, and let React show or hide a certain UI element based on a condition.
+
+```
+import React from 'react';
+
+export default class App extends React.Component {
+  render() {
+    const users = [
+      { name: 'Robin' },
+      { name: 'Markus' },
+    ];
+
+    const showUsers = true;
+    if (!showUsers) {
+      return null;
+    }
+
+    return (
+      <ul>
+        {users.map(user => <li>{user.name}</li>)}
+      </ul>
+    );
+  }
+}
+```
+
+```
+import React from 'react';
+
+export default class App extends React.Component {
+  render() {
+       const users = [
+      { name: 'Robin' },
+      { name: 'Markus' },
+    ];
+    const showUsers = true;
+    return (
+      <div>
+        {
+          showUsers ? (
+            <ul>
+              {users.map(user => <li>{user.name}</li>)}
+            </ul>
+          ) : (
+            null
+          )
+        }
+      </div>
+    );
+  }
+}
+```
+
+Once again, most of React is actually JavaScript, and not anything React specific.
+
+# Object Destructuring & Spread Operators
+
+-  Rather than assigning them to avaraible one by one, you can use *destructing* assignment in JS.
+
+```
+const student = {
+  ID: '21',
+  name: 'Jhon',
+  GPA: '3.0',
+};
+
+const id = student.ID;
+const name = student.name;
+const GPA = student.GPA;
+
+console.log(id);
+console.log(name);
+console.log(GPA);
+```
+
+A simplier version of this is:
+
+```
+const student = {
+    ID: '21',
+    name: "Jhon",
+    GPA: '3.0',
+};
+const {ID, name, GPA} = student;
+```
+
+List the properties you want inside the curly brackets and even rename them using aliases:
+
+```
+const student = {
+    ID: '21',
+    name: 'John',
+    GPA: '3.0',
+};
+const {name:n} = student; //Aliases
+console.log(n)
+```
+
+Another example of destructing:
+
+```
+//no destructing
+const users = this.state.users;
+const counter = this.state.counter;
+
+// destructing
+const {users, counter} = this.state
+```
 
 
 
